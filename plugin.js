@@ -13,13 +13,13 @@ const UPSTREAM_MODELS = {
 export const meta = {
   apiVersion: 1,
   key: "smile-yunfei-veo",
-  name: "云飞 Veo · Smile AI",
-  icon: "text:云飞",
+  name: "Smile AI Veo",
+  icon: "text:AI",
   description: {
-    en: "Yunfei Omni Flash and Veo Fast, Lite and Standard video generation",
-    zh: "云飞 Omni Flash 与 Veo 快速、轻量、标准版视频生成",
+    en: "Smile AI Omni Flash and Veo Fast, Lite and Standard video generation",
+    zh: "Smile AI Omni Flash 与 Veo 快速、轻量、标准版视频生成",
   },
-  version: "1.0.0",
+  version: "1.0.1",
   author: { name: "Smile AI", url: "https://github.com/7452smile" },
   website: "https://github.com/7452smile/smile-ai-newapi-yunfei-veo",
   baseUrl: "https://img.yunfei.best",
@@ -149,7 +149,7 @@ function upstreamModel(ctx) {
   const name = ctx.upstreamModel || ctx.model;
   if (own(UPSTREAM_MODELS, name)) return UPSTREAM_MODELS[name];
   if (Object.values(UPSTREAM_MODELS).includes(name)) return name;
-  throw new Error("The selected model is not supported by the Yunfei video plugin");
+  throw new Error("The selected model is not supported by the Smile AI Veo plugin");
 }
 
 function videosURL(baseUrl) {
@@ -157,7 +157,7 @@ function videosURL(baseUrl) {
     throw new Error("Channel Base URL must be an HTTP(S) API origin without credentials or a query");
   }
   const base = baseUrl.replace(/\/+$/, "");
-  if (/\/v1beta$/.test(base)) throw new Error("Use the Yunfei API origin, not /v1beta");
+  if (/\/v1beta$/.test(base)) throw new Error("Use the video API origin, not /v1beta");
   return base + (/\/v1$/.test(base) ? "/videos" : "/v1/videos");
 }
 

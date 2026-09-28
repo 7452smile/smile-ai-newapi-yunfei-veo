@@ -1,10 +1,32 @@
-# Smile AI · 云飞 Veo / Omni 视频任务插件
+# Smile AI Veo 视频任务插件
 
 用于 NewAPI **任务插件 API v1** 的单文件 JavaScript 插件。它将 `/v1/videos` 请求接到云飞的视频接口，提供异步任务查询、视频地址和按秒计费用量。
 
-**安装只需要 `plugin.js`。不需要修改 NewAPI 核心代码、安装 Node.js 或重新构建镜像。** 导入后还需要绑定渠道并配置价格；本仓库不自动修改任何线上配置。
+**运行只需要 `plugin.js`；显示品牌图片还需在上传窗口选择 `icon.png`。不需要修改 NewAPI 核心代码、安装 Node.js 或重新构建镜像。** 首次导入后还需要绑定渠道并配置价格；本仓库不自动修改任何线上配置。
 
-插件标识：`smile-yunfei-veo` · 版本：`1.0.0`
+插件名称：**Smile AI Veo** · 插件标识：`smile-yunfei-veo` · 版本：`1.0.1`
+
+## 从 1.0.0 升级
+
+1. 在 **任务插件** 中打开原来的 **云飞 Veo · Smile AI**，选择“上传新版本”。不要删除旧插件或新建另一个插件标识。
+2. 从下面的 `v1.0.1/plugin.js` 地址导入源码，或上传对应的 `plugin.js` 文件。
+3. 在同一窗口的 **插件图标** 中选择本仓库的 `icon.png`，确认预览名称为 **Smile AI Veo**、版本为 `1.0.1`，再上传。
+4. 打开插件详情的 **版本历史**，在 `1.0.1` 一行点击 **激活 / 回滚**，确认它变为激活版本。
+5. 刷新后台和模型广场。已经绑定 `smile-yunfei-veo` 的渠道无需重新选择提供方；四个模型和原有定价配置继续使用。尚未绑定本插件的渠道仍须按后文设置。
+
+此版本更新显示名称、描述、错误提示中的品牌文字和图标文件，不改请求、模型映射、异步查询或计费逻辑。内部标识保持不变，避免影响现有渠道和价格；仓库名、上游地址及内部标识仍可用于识别上游，因此这是显示改名，不是完整的供应商信息隐藏方案。
+
+### 图标说明
+
+`icon.png` 使用站点提供的[品牌图片](https://api.smile-ai-studio.com/festival/assets/brand.png)。NewAPI 禁止在 `meta.icon` 中写图片网址或 base64；图片必须通过上传窗口的独立图标栏提交。**仅从 URL 导入 `plugin.js` 不会自动导入图片。**
+
+固定版本图标下载地址：
+
+```text
+https://raw.githubusercontent.com/7452smile/smile-ai-newapi-yunfei-veo/v1.0.1/icon.png
+```
+
+当前 Smile AI NewAPI 的插件管理支持独立图片，但模型广场的服务方页签只读取 `meta.icon`，尚未传递独立图片信息。因此后台插件管理可显示品牌图片，模型广场会显示 **Smile AI Veo** 和 **AI** 文字图标。要让模型广场也显示品牌图片，需要另外修改 NewAPI；只更新插件无法实现。插件使用 `text:AI` 作为未加载图片时的后备图标。
 
 ## 四个模型
 
@@ -25,13 +47,13 @@ Omni 的对外名称已按要求改为 `gemini-omni-1.1-flash`。客户端和渠
 
 1. 在管理员后台找到 **任务插件**，打开“上传任务插件”。
 2. 选择“从 URL 导入”，粘贴下面的 **JS 源码链接**；也可以将 `plugin.js` 下载后直接上传文件。
-3. 预览应显示名称 **云飞 Veo · Smile AI**、标识 `smile-yunfei-veo`、版本 `1.0.0` 和上述四个模型，再保存。
-4. 确保任务插件总开关及此插件处于启用状态。
+3. 在 **插件图标** 中选择 `icon.png`。预览应显示名称 **Smile AI Veo**、标识 `smile-yunfei-veo`、版本 `1.0.1` 和上述四个模型，再保存。
+4. 确保任务插件总开关及此插件处于启用状态。若已有旧版本，在 **版本历史** 中激活 `1.0.1`。
 
 固定版本导入地址（建议使用）：
 
 ```text
-https://raw.githubusercontent.com/7452smile/smile-ai-newapi-yunfei-veo/v1.0.0/plugin.js
+https://raw.githubusercontent.com/7452smile/smile-ai-newapi-yunfei-veo/v1.0.1/plugin.js
 ```
 
 主分支源码地址（后续可能更新）：
@@ -51,7 +73,7 @@ https://raw.githubusercontent.com/7452smile/smile-ai-newapi-yunfei-veo/main/plug
 | 项目 | 设置 |
 | --- | --- |
 | 渠道类型 | **Task Plugin / 任务插件**，类型编号 `61` |
-| 绑定插件 | **云飞 Veo · Smile AI** / `smile-yunfei-veo` |
+| 绑定插件 | **Smile AI Veo** / `smile-yunfei-veo` |
 | Base URL | `https://img.yunfei.best`，也兼容末尾 `/v1` |
 | 密钥 | 在渠道后台填写自己的云飞 API Key |
 | 模型 | 上表左列的四个名称 |
@@ -67,8 +89,8 @@ https://raw.githubusercontent.com/7452smile/smile-ai-newapi-yunfei-veo/main/plug
 插件输出的计费用量字段是 `seconds`，单位是 **秒**，没有内置任何售价。
 
 1. 进入 **模型定价**，分别打开四个对外模型名。
-2. 选择 **云飞 Veo · Smile AI** 页签。
-3. 开启“为此服务方单独设置”，配置自己的每秒售价并保存。
+2. Fast / Standard 等有多个服务方的模型，选择 **Smile AI Veo** 页签，开启“为此服务方单独设置”。
+3. 配置自己的每秒售价并保存。Omni / Lite 若只有本插件且没有服务方专属价格，不显示服务方页签，直接在默认模型价格中设置视频生成单价即可。
 4. 检查 4、6、8 秒的价格预览是否符合预期，同时核对分组倍率。
 
 如果使用可视化价格输入框，按界面标明的币种填写；如果直接编辑表达式，表达式中的金额始终是 **USD**。例如下面仅为演示：
@@ -162,6 +184,8 @@ npm run test:host -- /path/to/new-api
 测试在临时目录创建独立 Go 模块，通过本地 `replace` 引用 NewAPI 源码，完成后清理临时目录。它不会修改 NewAPI 源码、启动网关或连接数据库，也不会请求云飞；Go 首次执行可能需要下载依赖。测试涵盖 Sobek 插件导入、与 Google 插件共存、实际适配器请求构造、秒数校验、USD 表达式和分组倍率、任务解析、即时完成、公开结果与无凭据下载描述。
 
 首版验证基线：本地 Smile AI RC.39 源码提交 `1af7d956238ac1cb100f5fa3c747980593245397`。16 项 Node 测试及 5 组宿主测试通过，宿主请求/计费部分含 24 个模型、映射和时长组合。**这不等同于真实云飞生成验收或线上钱包/退款验收。**
+
+`1.0.1` 于 2026-09-28 再次通过语法检查、全部 16 项 Node 测试和 5 组宿主测试；本次宿主源码基线为 `5ccac08d1f5abd74eb867002ee3a31b0382f9e2d`。品牌 PNG 为 348,408 字节，编码后的上传字段为 464,566 字节，符合宿主 512 KiB 限制。
 
 本次开发没有访问或更改生产配置，没有部署、重启或发起真实付费视频生成。
 

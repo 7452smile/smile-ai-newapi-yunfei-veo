@@ -1,9 +1,9 @@
 {
   "name": "smile-ai-newapi-yunfei-veo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "type": "module",
-  "description": "Yunfei video task plugin for New API, with per-second billing for four models",
+  "description": "Smile AI Veo task plugin for New API, with per-second billing for four models",
   "scripts": {
     "test": "node --test test/plugin.test.js",
     "check": "node --check plugin.js && node --check scripts/test-newapi.mjs",
